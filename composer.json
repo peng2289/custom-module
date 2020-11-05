@@ -1,0 +1,24 @@
+{
+    "name": "peng2289/custom-module",
+    "type": "library",
+    "require": {
+        "php": ">=7.0",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
+        "ext-openssl": "*"
+    },
+    "authors": [
+        {
+            "name": "peng2289",
+            "email": "peng2289@163.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "WeChat\\": "src/weChat"
+        }
+    }
+}
