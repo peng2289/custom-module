@@ -54,10 +54,18 @@ class DeviceDetector
             if (preg_match($this->regex($v['regex']), $browserStr, $match)) {
                 if (!isset($match[0])) continue;//跳过
                 foreach ($v['models'] as $v2) {
-                    if (preg_match($this->regex($v2['regex']), $match[0])) {
+                    if (preg_match($this->regex($v2['regex']), $match[0], $match2)) {
+                        $v2['model'] = $this->regexModel($v2['model'], $match2);//替换特征符
                         return ['brand' => $k, "alias" => $v2['model'], "device" => $k . " " . $v2['model']];
                     }
                 }
+                foreach ($v['models'] as $v2) {
+                    if (preg_match($this->regex($v2['regex']), $browserStr, $match2)) {
+                        $v2['model'] = $this->regexModel($v2['model'], $match2);//替换特征符
+                        return ['brand' => $k, "alias" => $v2['model'], "device" => $k . " " . $v2['model']];
+                    }
+                }
+                return ['brand' => $k];
             }
         }
         return [];
@@ -73,6 +81,23 @@ class DeviceDetector
     private function regex($regex)
     {
         return '/(?:^|[^A-Z0-9\-_]|[^A-Z0-9\-]_|sprd-)(?:' . \str_replace('/', '\/', $regex) . ')/i';
+    }
+
+    /**
+     * @param $model
+     * @param $match
+     * @return string|string[]|null
+     * @name:   替换设备中特殊符号
+     * @author: peng2289@163.com
+     * @date:   2020/12/25
+     */
+    private function regexModel($model, $match)
+    {
+        return preg_replace_callback('/\$(\d)/i', function ($match2) use ($match) {
+            if (isset($match2[1]) && isset($match[$match2[1]])) {
+                return str_replace('$' . $match2[1], $match[$match2[1]], $match2[0]);
+            }
+        }, $model);
     }
 
     /**
