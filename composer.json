@@ -18,7 +18,9 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "WeChat\\": "src/weChat"
+            "WeChat\\": "src/WeChat",
+            "BrowserDevice\\": "src/BrowserDevice"
         }
-    }
+    },
+    "description": "自定义模块信息"
 }
