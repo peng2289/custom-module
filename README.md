@@ -1,3 +1,16 @@
+自定义模块
+==============
+
+[![Latest Stable Version](https://poser.pugx.org/peng2289/custom-module/v/stable)](https://packagist.org/packages/peng2289/custom-module)
+[![Latest Unstable Version](https://poser.pugx.org/peng2289/custom-module/v/unstable)](https://packagist.org/packages/peng2289/custom-module)
+[![Total Downloads](https://poser.pugx.org/peng2289/custom-module/downloads)](https://packagist.org/packages/peng2289/custom-module)
+[![License](https://poser.pugx.org/peng2289/custom-module/license)](https://packagist.org/packages/peng2289/custom-module)
+## 用法
+composer安装
+```
+composer require peng2289/custom-module 
+``` 
+****
 功能：继承微信异步事件  
 更新于2020年11月5日  
 接入方法见demo  
@@ -5,7 +18,8 @@
 2020年12月25日新增浏览器解析  
 设备库来源（svn）：https://github.com/matomo-org/device-detector/trunk/regexes/device/mobiles.yml  
 仓库地址:https://github.com/matomo-org/device-detector  
-****
+
+```
 响应结果  
 Array  
 (  
@@ -17,6 +31,7 @@ Array
     [alias] => Enjoy 10S  
     [device] => Huawei Enjoy 10S  
 )  
+```
 ****
 
 2020年12月28日新增微信支付V2版本接口  
