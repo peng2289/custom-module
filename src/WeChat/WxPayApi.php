@@ -718,15 +718,12 @@ class WxPayApi
         }
         //业务结果
         if (isset($result['result_code']) && $result['result_code'] == "FAIL") {
-            $result = ["err_code" => $result['err_code']];
             return [500, "{$result['err_code']} 【{$result['err_code_des']}】"];
         }
         //去除多余参数
         unset(
             $result['return_code'],
             $result['return_msg'],
-            $result['appid'],
-            $result['mch_id'],
             $result['nonce_str'],
             $result['result_code']
         );
@@ -780,14 +777,14 @@ class WxPayApi
                 $logsPath .= date("Ym") . "/";
                 if (!is_dir($logsPath)) mkdir($logsPath, 0755, true);//创建目录
                 $str = date('Y-m-d H:i:s') . PHP_EOL . '[ 请求参数 ] ' . $param['url'] . PHP_EOL . $param['data'] . PHP_EOL . '[ 返回结果 ] ' . PHP_EOL . $response . PHP_EOL;
-                file_put_contents($logsPath . "api_log" . date('Y-m-d') . '.log', $str, FILE_APPEND);
+                file_put_contents($logsPath . "api_log_" . date('d') . '.log', $str, FILE_APPEND);
             }
             list($errCode, $msg) = $this->resultHandle($response, $result);
             if ($errCode != 0) return [$errCode, $msg];
             curl_close($ch);
             return [0, "ok"];
         } catch (\Exception $e) {
-            return [600, $e];
+            return [600, $e->getMessage()];
         }
     }
 }
